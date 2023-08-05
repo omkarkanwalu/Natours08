@@ -12,25 +12,28 @@ const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 const reviewBtn = document.querySelectorAll('.review-it');
-const hiddenDiv = document.querySelectorAll('.hiddenDiv');
+
+const hiddenDiv = document.getElementById('hiddenDiv12');
 const reviewSubmit = document.querySelector('.review-submit');
+let ct_id;
 
 if (reviewBtn) {
-  reviewBtn.forEach((el) =>
+  reviewBtn.forEach((el) => {
     el.addEventListener('click', function (e) {
-      hiddenDiv.forEach((hiddenDiv) => hiddenDiv.classList.toggle('visible'));
-      if (reviewSubmit) {
-        reviewSubmit.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const rating = document.getElementById('ratingInput').value;
+      ct_id = el.getAttribute('current-tour-Id');
+      console.log(ct_id);
+      hiddenDiv.classList.toggle('visible');
+    });
+  });
+}
 
-          const review = document.getElementById('reviewInput').value;
-
-          CreateNewReviewonTour(ct_id, rating, review);
-        });
-      }
-    })
-  );
+if (reviewSubmit) {
+  reviewSubmit.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const rating = document.getElementById('ratingInput').value;
+    const review = document.getElementById('reviewInput').value;
+    CreateNewReviewonTour(ct_id, rating, review);
+  });
 }
 
 if (bookBtn) {
